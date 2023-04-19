@@ -7,3 +7,9 @@ body,
 :root{
   height: 100%;
 }
+.categories::-webkit-scrollbar{
+  @apply w-1 h-1
+}
+.categories::-webkit-scrollbar-thumb{
+  @apply bg-neutral-500 rounded-xl
+}

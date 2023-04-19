@@ -10,6 +10,8 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import Button from "../Button";
+import { signIn } from "next-auth/react";
+import { sign } from "crypto";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -51,8 +53,8 @@ const RegisterModal = () => {
   )
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
-      <Button icon={FcGoogle} onClick={()=>{}} outline label="Continue with Google" />
-      <Button icon={AiFillGithub} onClick={()=>{}} outline label="Continue with Github" />
+      <Button icon={FcGoogle} onClick={()=>{signIn('google')}} outline label="Continue with Google" />
+      <Button icon={AiFillGithub} onClick={()=>{signIn('github')}} outline label="Continue with Github" />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row items-center justify-center gap-2">
           <div className="">Already have an account ?</div>
