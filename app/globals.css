@@ -13,3 +13,6 @@ body,
 .categories::-webkit-scrollbar-thumb{
   @apply bg-neutral-500 rounded-xl
 }
+.leaflet-bottom,.leaflet-control,.leaflet-pane,.leaflet-top{
+  z-index: 0 !important;
+}

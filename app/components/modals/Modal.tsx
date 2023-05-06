@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import Button from "../Button";
 
 interface ModalProps {
-  children:React.ReactNode
+  children?:React.ReactNode
   isOpen: boolean;
   onClose: () => void;
   onSubmit: () => void;
