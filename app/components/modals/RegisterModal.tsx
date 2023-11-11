@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
@@ -16,7 +16,7 @@ import { sign } from "crypto";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
-  const loginModal = useLoginModal()
+  const loginModal = useLoginModal();
   const [isLoading, setisLoading] = useState(false);
   const {
     register,
@@ -35,54 +35,94 @@ const RegisterModal = () => {
       .post("/api/register", data)
       .then(() => {
         registerModal.onClose();
-        toast.success('Your account has been crated')
-
+        loginModal.onOpen();
+        toast.success("Your account has been crated");
       })
       .catch((error) => {
-        toast.error('Somthing went wrong')
+        toast.error("Somthing went wrong");
       })
       .finally(() => {
         setisLoading(false);
       });
   };
-  const toggle = useCallback(()=>{
-    registerModal.onClose()
-    loginModal.onOpen()
-  },[registerModal, loginModal])
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
   const bodyContent = (
     <div className="flex flex-col gap-4">
-        <Heading title="Welcome to Airbnb" subtitle="Create your account"  />
-        <Input id="email" label="Email" type="email"  disabled={isLoading} register={register} errors={errors} required />
-        <Input id="name" label="Name" type="text"  disabled={isLoading} register={register} errors={errors} required />
-        <Input id="password" label="Password" type="password"  disabled={isLoading} register={register} errors={errors} required />
+      <Heading title="Welcome to Airbnb" subtitle="Create your account" />
+      <Input
+        id="email"
+        label="Email"
+        type="email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="name"
+        label="Name"
+        type="text"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
     </div>
-  )
+  );
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
-      <Button icon={FcGoogle} onClick={()=>{signIn('google')}} outline label="Continue with Google" />
-      <Button icon={AiFillGithub} onClick={()=>{signIn('github')}} outline label="Continue with Github" />
+      <Button
+        icon={FcGoogle}
+        onClick={() => {
+          signIn("google");
+        }}
+        outline
+        label="Continue with Google"
+      />
+      <Button
+        icon={AiFillGithub}
+        onClick={() => {
+          signIn("github");
+        }}
+        outline
+        label="Continue with Github"
+      />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row items-center justify-center gap-2">
           <div className="">Already have an account ?</div>
-          <div onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline">Login</div>
+          <div
+            onClick={toggle}
+            className="text-neutral-800 cursor-pointer hover:underline"
+          >
+            Login
+          </div>
         </div>
-        
       </div>
     </div>
-  )
+  );
   return (
     <Modal
-        disabled={isLoading}
-        isOpen={registerModal.isOpen}
-        title="Register"
-        actionLabel="Continue"
-        onClose={registerModal.onClose}
-        onSubmit={handleSubmit(onSubmit)}
-        body={bodyContent}
-        footer={footerContent}
-    >
-    
-    </Modal>
+      disabled={isLoading}
+      isOpen={registerModal.isOpen}
+      title="Register"
+      actionLabel="Continue"
+      onClose={registerModal.onClose}
+      onSubmit={handleSubmit(onSubmit)}
+      body={bodyContent}
+      footer={footerContent}
+    ></Modal>
   );
 };
 
